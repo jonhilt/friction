@@ -29,3 +29,4 @@ D:\Jon\OneDrive\Talks\Layers to Vertical Slices\FrictionProject\Friction.WebVS\o
 D:\Jon\OneDrive\Talks\Layers to Vertical Slices\FrictionProject\Friction.WebVS\obj\Debug\netcoreapp2.2\Razor\Features\_ViewImports.g.cshtml.cs
 D:\Jon\OneDrive\Talks\Layers to Vertical Slices\FrictionProject\Friction.WebVS\obj\Debug\netcoreapp2.2\Razor\Features\_ViewStart.g.cshtml.cs
 D:\Jon\OneDrive\Talks\Layers to Vertical Slices\FrictionProject\Friction.WebVS\obj\Debug\netcoreapp2.2\Razor\Features\Users\Search.g.cshtml.cs
+D:\Jon\OneDrive\Talks\Layers to Vertical Slices\FrictionProject\Friction.WebVS\obj\Debug\netcoreapp2.2\Razor\Features\Users\Add.g.cshtml.cs

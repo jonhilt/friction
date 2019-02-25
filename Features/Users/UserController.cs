@@ -15,8 +15,27 @@ namespace Friction.WebVS.Features.Users
 
         public async Task<IActionResult> List()
         {
-            await _mediator.Send(new List.Query());
+            var result = await _mediator.Send(new List.Query());
+            return View(result);
+        }
+
+        public async Task<IActionResult> Search(Search.Query query)
+        {
+            var result = await _mediator.Send(query);
+            return View(result);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Add()
+        {
             return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Add(Add.Command command)
+        {
+            await _mediator.Send(command);
+            return RedirectToAction(nameof(Add));
         }
     }
 }
