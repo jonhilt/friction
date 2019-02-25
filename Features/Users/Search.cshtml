@@ -1,0 +1,24 @@
+@model Friction.WebVS.Features.Users.Search.Model
+@{
+    ViewData["Title"] = "List";
+}
+
+<h1>Search Results</h1>
+
+@foreach (var result in Model.Results)
+{
+    <table>
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@result.FirstName</td>
+                <td>@result.LastName</td>
+            </tr>
+        </tbody>
+    </table>
+}
