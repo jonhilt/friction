@@ -24,6 +24,8 @@ namespace Friction.WebVS.Features.Users {
         {
             public async Task<Model> Handle(Query request, CancellationToken cancellationToken)
             {
+                // search using EF Core/Dapper etc...
+
                 return new Model { Results = new List<Model.SearchResult> {
                     new Model.SearchResult { FirstName = "Bob", LastName = "Smith", Id = 1 },
                     new Model.SearchResult { FirstName = "Susan", LastName = "Jones", Id = 2 },
