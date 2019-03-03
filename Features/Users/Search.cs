@@ -1,7 +1,11 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Friction.WebVS.Models;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace Friction.WebVS.Features.Users
 {
@@ -15,11 +19,11 @@ namespace Friction.WebVS.Features.Users
 
         public class Model
         {
-            public List<SearchResult> Results { get; set; }
+            public List<SearchResult> Results { get; set; } = new List<SearchResult>();
 
             public class SearchResult
             {
-                public int Id { get; set; }
+                public Guid Id { get; set; }
                 public string FirstName { get; set; }
                 public string LastName { get; set; }
             }
@@ -27,24 +31,33 @@ namespace Friction.WebVS.Features.Users
 
         public class QueryHandler : IRequestHandler<Query, Model>
         {
+            private readonly AppDbContext appContext;
+
+            public QueryHandler(AppDbContext appContext)
+            {
+                this.appContext = appContext;
+            }
+
             public async Task<Model> Handle(Query request, CancellationToken cancellationToken)
             {
-                // search using EF Core/Dapper etc...
-                // request.Term is set to whatever was searched for...
-
                 if (string.IsNullOrEmpty(request.Term))
                     return new Model();
 
+                // could easily replace with dapper etc. if query needs to be super fast!
+
+                var results = appContext.Users.Where(x => x.FirstName.Contains(request.Term) || x.LastName.Contains(request.Term))
+                    .Select(x => new Model.SearchResult
+                    {
+                        FirstName = x.FirstName,
+                        LastName = x.LastName,
+                        Id = x.Id
+                    });
+
                 return new Model
                 {
-                    Results = new List<Model.SearchResult> {
-                        new Model.SearchResult { FirstName = "Bob", LastName = "Smith", Id = 1 },
-                        new Model.SearchResult { FirstName = "Susan", LastName = "Jones", Id = 2 }
-
-                    }
+                    Results = await results.ToListAsync(cancellationToken)
                 };
             }
         }
     }
-
 }
