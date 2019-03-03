@@ -15,12 +15,13 @@ namespace Friction.WebVS.Features.Users
 
         public class Model
         {
-            public List<User> Users { get; set; } = new List<User>();
+            public List<User> RecentLogins { get; set; } = new List<User>();
 
             public class User
             {
                 public string FirstName { get; set; }
                 public string LastName { get; set; }
+                public string LastLogin { get; set; }
             }
         }
 
@@ -40,7 +41,12 @@ namespace Friction.WebVS.Features.Users
                 var result = new Model();
                 foreach (var topUser in topUsers)
                 {
-                    result.Users.Add(new Model.User { FirstName = topUser.FirstName, LastName = topUser.LastName });
+                    result.RecentLogins.Add(new Model.User
+                    {
+                        FirstName = topUser.FirstName,
+                        LastName = topUser.LastName,
+                        LastLogin = topUser.LastLogin.ToString("dd/MM/yyyy")
+                    });
                 }
                 return result;
             }

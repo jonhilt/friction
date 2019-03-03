@@ -16,6 +16,7 @@ namespace Friction.WebVS.Features.Users {
                 public int Id { get; set; }
                 public string FirstName { get; set; }
                 public string LastName { get; set; }
+                public string LastLogin { get; set; }
             }
         }
 
@@ -24,8 +25,8 @@ namespace Friction.WebVS.Features.Users {
             public async Task<Model> Handle(Query request, CancellationToken cancellationToken)
             {
                 return new Model { Users = new List<Model.User> {
-                    new Model.User { FirstName = "Bob", LastName = "Smith", Id = 1 },
-                    new Model.User { FirstName = "Susan", LastName = "Jones", Id = 2 },
+                    new Model.User { FirstName = "Bob", LastName = "Smith", Id = 1, LastLogin = "01/01/2019" },
+                    new Model.User { FirstName = "Susan", LastName = "Jones", Id = 2, LastLogin = "01/02/2019" },
                 } };
             }
         }

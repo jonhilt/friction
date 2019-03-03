@@ -6,22 +6,31 @@ namespace Friction.WebVS.Features.Users
 {
     public class UserController : Controller
     {
-        private readonly IMediator _mediator;
+        private readonly IMediator mediator;
 
         public UserController(IMediator mediator)
         {
-            _mediator = mediator;
+            this.mediator = mediator;
         }
 
+        [HttpGet]
         public async Task<IActionResult> List()
         {
-            var result = await _mediator.Send(new List.Query());
+            var result = await mediator.Send(new List.Query());
             return View(result);
         }
 
+        [HttpGet]
         public async Task<IActionResult> Search(Search.Query query)
         {
-            var result = await _mediator.Send(query);
+            var result = await mediator.Send(query);
+            return View(result);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> RecentLogins(RecentLogins.Query query)
+        {
+            var result = await mediator.Send(query);
             return View(result);
         }
     }

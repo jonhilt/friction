@@ -1,5 +1,25 @@
+@model Friction.WebVS.Features.Users.List.Model
+
 @{
     ViewData["Title"] = "List";
 }
 
 <h1>Users</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Last Login</th>
+        </tr>
+    </thead>
+    @foreach (var user in Model.Users)
+    {
+        <tr>
+            <td>@user.FirstName</td>
+            <td>@user.LastName</td>
+            <td>@user.LastLogin</td>
+        </tr>
+    }
+</table>

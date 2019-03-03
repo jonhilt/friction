@@ -3,17 +3,22 @@ using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 
-namespace Friction.WebVS.Features.Users {
+namespace Friction.WebVS.Features.Users
+{
 
-    public class Search {
-        public class Query : IRequest<Model> {
+    public class Search
+    {
+        public class Query : IRequest<Model>
+        {
             public string Term { get; set; }
         }
 
-        public class Model {
-            public List<SearchResult> Results { get;set; }
+        public class Model
+        {
+            public List<SearchResult> Results { get; set; }
 
-            public class SearchResult {
+            public class SearchResult
+            {
                 public int Id { get; set; }
                 public string FirstName { get; set; }
                 public string LastName { get; set; }
@@ -25,13 +30,21 @@ namespace Friction.WebVS.Features.Users {
             public async Task<Model> Handle(Query request, CancellationToken cancellationToken)
             {
                 // search using EF Core/Dapper etc...
+                // request.Term is set to whatever was searched for...
 
-                return new Model { Results = new List<Model.SearchResult> {
-                    new Model.SearchResult { FirstName = "Bob", LastName = "Smith", Id = 1 },
-                    new Model.SearchResult { FirstName = "Susan", LastName = "Jones", Id = 2 },
-                } };
+                if (string.IsNullOrEmpty(request.Term))
+                    return new Model();
+
+                return new Model
+                {
+                    Results = new List<Model.SearchResult> {
+                        new Model.SearchResult { FirstName = "Bob", LastName = "Smith", Id = 1 },
+                        new Model.SearchResult { FirstName = "Susan", LastName = "Jones", Id = 2 }
+
+                    }
+                };
             }
         }
-    }   
+    }
 
 }

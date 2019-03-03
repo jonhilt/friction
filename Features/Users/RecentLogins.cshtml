@@ -1,0 +1,22 @@
+﻿@model Friction.WebVS.Features.Users.RecentLogins.Model
+
+<h1>Recent Logins</h1>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Last Login</th>
+    </tr>
+    </thead>
+    
+    @foreach (var login in Model.RecentLogins)
+    {
+        <tr>
+            <td>@login.FirstName</td>
+            <td>@login.LastName</td>
+            <td>@login.LastLogin</td>
+        </tr>
+    }
+</table>
